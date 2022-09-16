@@ -1,31 +1,72 @@
-function getComputerChoice() {
-    let computerPlay = Math.floor(Math.random()*3 + 1);
-    switch(computerPlay) {
-        case 1:
-            document.write("Rock");
-            break;
-        case 2:
-            document.write("Paper");
-            break;
-        case 3:
-            document.write("Scissors");
-            break;
+
+
+let playerSelection;
+let playerWin = 0;
+let computerWin = 0;
+let randomNum = ["rock", "paper", "scissors"];
+let computerSelection = randomNum[Math.floor(Math.random()*randomNum.length)];
+
+
+document.write(computerSelection + "<br>");
+
+
+function playRound() {
+    for(let i = 0; i < 5; i++) {
+
+        playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase();
+
+        if(playerSelection === computerSelection) {
+            alert("It's a tie");
+        } else if (computerSelection === "rock") {
+            if(playerSelection === "paper") {
+                alert("You win! The paper beats the rock.");
+                ++playerWin;
+            } else {
+                alert("You lose! The rock beats the scissors.");
+                ++computerWin;
+            }
+        } else if (computerSelection === "paper") {
+            if (playerSelection === "rock") {
+                alert("You lose! The paper beats the rock.");
+                ++computerWin;
+            } else {
+                alert("you win! The scissors beats the paper.");
+                ++playerWin;
+            }
+        } else if (computerSelection === "scissors") {
+            if(playerSelection === "rock") {
+                alert("You win! The rock beats the scissors.");
+                ++playerWin;
+            } else {
+                alert("You lose! The scissors beats the paper.");
+                ++computerWin;
+            }
+        }
+        computerSelection = randomNum[Math.floor(Math.random()*randomNum.length)];
     }
 }
 
-getComputerChoice();
+function whoWon() {
+    if(playerWin > computerWin) {
+        document.write("You beat the computer! Congrats!!!");
+    } else if (playerWin < computerWin) {
+        document.write("Computer beats you, better luck next time!!");
+    } else {
+        document.write("It's a tie....Play again??");
+    }
+}
 
-//get on the step 4
+
+document.write(playerSelection + "<br>");
+playRound(playerSelection, computerSelection);
+document.write("<br>");
+document.write("Player: " + playerWin + "<br>");
+document.write("Computer: " + computerWin + "<br>");
+whoWon();
+
+//I want to change the value of the randomNum every round..line 28 
 
 
-
-/*
--> setting the value to be rock, paper & scissors 
--> selecting a number from 1 to 3 randomly and set it to the computer's choice 
--> Make sure to add + 1 cuz Math.random() gives you the number from 0 to 1..
--> allocate the numbers to each plays
--> create a function that provides you with which types wins against which and which ones to tie to each other...
--> let the player decicede which one to play (Make sure it accepts the uppercases, lowercases and mixed)
--> input the value into the function you previous created 
--> Output : if the player wins/ loses/ or a tie... 
+/* 
+I want change the value of the randomNum everytime a player is done. 
 */
